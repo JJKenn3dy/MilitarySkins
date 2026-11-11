@@ -1,7 +1,7 @@
 local M={}
 local accent='{D3DE96}';local white='{FFFFFF}';local muted='{A6B1A8}'
 local labels={
- [147]='Президент Республики',
+ [147]='Президент Республики',[228]='Мэр города',
  [1061]='СВ — генерал',[61]='СВ — полковник',[255]='СВ — капитан',[179]='Полевой военный',[287]='Армейский военный',
  [285]='SFU-17 — боец, пустыня',[1285]='SFU-17 — боец, город',
  [2285]='ОСН — сапёр, пустыня',[2287]='ОСН — разведчик, пустыня',[3287]='ОСН — разведчик, город',
@@ -77,7 +77,7 @@ function M.new(o)
             self:list('categories','Категория для '..name,{
                 {'Сухопутные войска','Состав СВ и ОСН',function()self:modelsMenu(name,'army')end},
                 {'ФБР','Оперативник и разведчик FBI',function()self:modelsMenu(name,'fbi')end},
-                {'Правительство','Президент Республики',function()self:modelsMenu(name,'government')end}
+                {'Правительство','Президент Республики и мэр города',function()self:modelsMenu(name,'government')end}
             },function()self:home()end);return
         end
         local rows={}

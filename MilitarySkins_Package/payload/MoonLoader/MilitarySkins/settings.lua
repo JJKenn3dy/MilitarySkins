@@ -1,6 +1,7 @@
 local M={}
-M.order={1061,61,179,255,285,287,1285,2285,2287,3287,4285,5285,120,1120,2120,4287,147}
+M.order={1061,61,179,255,285,287,1285,2285,2287,3287,4285,5285,120,1120,2120,4287,147,228}
 M.models={
+    [228]={name='Мэр города',category='government',base=228,dff='mayor228.dff',txd='mayor228.txd',dictionary='republic_mayor228_private'},
     [147]={name='Президент Республики',category='government',base=147,dff='president147.dff',txd='president147.txd',dictionary='republic_pres147_private'},
     [2120]={name='FBI — оперативник 120',base=285,dff='fbi_operator120.dff',txd='fbi_operator120.txd',dictionary='fbi_op120_private'},
     [4287]={name='FBI — разведчик',base=285,dff='fbi_scout.dff',txd='fbi_scout.txd',dictionary='fbi_scout_private'},
