@@ -1,5 +1,5 @@
 {
-  "version": "4.4.3",
+  "version": "4.4.4",
   "files": [
     {
       "name": "MoonLoader\\MilitarySkins\\access_client.lua",
@@ -87,7 +87,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\menu.lua",
-      "sha256": "e191eb60d4b270ae2f11977570197490d8dfb7a447921fad58c35ed3be9fc850"
+      "sha256": "5aeea9e2576d82a5c27c058b808479c1d4ae9b83c7aa82a6103ea3c19b1f39b2"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\officer61.dff",
@@ -207,7 +207,11 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins.lua",
-      "sha256": "23a50e8739c7859c6ebca7816a1392a2a3fb113f20be82bf6daed6b4df12cafa"
+      "sha256": "4e8753c14f1a50455473bcbe664659120932b510c4f612578148d1aac37876b3"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\release_updater.lua",
+      "sha256": "61565f6bf571ef0247f6cc443a59a958861e1ee63495d26b20c50d96ef1be580"
     }
   ]
 }

@@ -1,11 +1,12 @@
 """Пересчитать MilitarySkins_Package/manifest.json по файлам payload.
 
-Запуск из корня репозитория: python tools/update_manifest.py
+Запуск из корня репозитория: python tools/update_manifest.py [--version 4.3.2]
 Без пересчёта install.ps1 откажется ставить изменённый файл (Package checksum mismatch).
 """
 from pathlib import Path
 import hashlib
 import json
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE = ROOT / 'MilitarySkins_Package'
@@ -29,6 +30,8 @@ for name in sorted(set(before) | set(after)):
         state = 'добавлен' if name not in before else 'удалён' if name not in after else 'изменён'
         print(f'{state}: {name}')
 
-text = json.dumps({'version': old['version'], 'files': files}, ensure_ascii=False, indent=2)
+version = sys.argv[sys.argv.index('--version') + 1] if '--version' in sys.argv else old['version']
+assert all(part.isdigit() for part in version.split('.')) and version.count('.') == 2, 'Версия вида 4.3.2'
+text = json.dumps({'version': version, 'files': files}, ensure_ascii=False, indent=2)
 manifest_path.write_bytes(text.replace('\n', '\r\n').encode('utf-8'))
-print(f'manifest.json: {len(files)} файлов, версия {old["version"]}')
+print(f'manifest.json: {len(files)} файлов, версия {version}')

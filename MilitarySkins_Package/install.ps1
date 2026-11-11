@@ -53,7 +53,7 @@ try{
  }
  foreach($r in $records){if((Hash $r.target) -ne $r.sha256){throw 'Installed checksum mismatch'}}
  @{backup=$backup;files=$records;legacy=$legacy;version=$package.version}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath $latest -Encoding UTF8
- Write-Output ('MilitarySkins '+$package.version+' installed. Start GTA and use /mskin. Automatic updates removed.')
+ Write-Output ('MilitarySkins '+$package.version+' installed. Start GTA and use /mskin. Next versions arrive automatically from GitHub releases.')
 }catch{
  foreach($r in $done){if($r.existed){Copy-Item -LiteralPath (Join-Path $backup $r.name) -Destination $r.target -Force}elseif(Test-Path -LiteralPath $r.target){Remove-Item -LiteralPath $r.target -Force}}
  foreach($entry in $legacy){$disabled=Target $entry.disabled;$original=Target $entry.name;if(Test-Path -LiteralPath $disabled){Move-Item -LiteralPath $disabled -Destination $original}}
