@@ -4,6 +4,7 @@ local ffi = require 'ffi'
 local M = {}
 
 local signatures = {
+    [0x7C7810] = '8b4424048b400cc3', -- RpSkinGetSkinToBoneMatrices
     [0x749D40] = '568b742408578b7c', -- RpAtomicSetGeometry
     [0x74CCC0] = '568b742408668b46', -- RpGeometryDestroy
     [0x7C7520] = '8b4424048b15a478', -- RpSkinAtomicSetHAnimHierarchy
@@ -62,15 +63,22 @@ function M.new(directory, lookup, currentServer)
     local getHierarchy=native('void* (__cdecl *)(void*)',0x7C7540)
     local getSkin=native('void* (__cdecl *)(void*)',0x7C7550)
     local numBones=native('unsigned int (__cdecl *)(void*)',0x7C77E0)
+    local skinMatrices=native('void* (__cdecl *)(void*)',0x7C7810)
     local destroyGeometry=native('int (__cdecl *)(void*)',0x74CCC0)
     local guard=dofile(directory..'\\memory_guard.lua').new()
+    local rig=dofile(directory..'\\rig_offsets.lua').new({
+        skinMatrices=function(s)return skinMatrices(ptr(s))end,
+        blendOffset=function()
+            assert(guard(0xB5F878,4,false),'Animation plugin unavailable')
+            return tonumber(ffi.cast('uint32_t*',0xB5F878)[0])
+        end},guard)
     local swap=dofile(directory..'\\geometry_swap.lua').new({
         setGeometry=function(a,g,f)return setGeometry(ptr(a),ptr(g),f)end,
         setHierarchy=function(a,h)return setHierarchy(ptr(a),ptr(h))end,
         getHierarchy=function(a)return getHierarchy(ptr(a))end,
         getSkin=function(g)return getSkin(ptr(g))end,
         numBones=function(s)return numBones(ptr(s))end,
-        destroyGeometry=function(g)return destroyGeometry(ptr(g))end},guard)
+        destroyGeometry=function(g)return destroyGeometry(ptr(g))end},guard,rig)
 
     local function checkBuild()
         if checked then return end

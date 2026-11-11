@@ -1,6 +1,7 @@
 local M={}
 function M.new(o)
     local self={server='',state='idle',record=o.pending,nextPoll=0,busy=false}
+    if type(self.record)=='table'then self.record.scope='manager'end
     local terminal={denied=true,expired=true,revoked=true}
     local function changed()if o.changed then o.changed()end end
     function self:public()
@@ -14,7 +15,7 @@ function M.new(o)
         else self.record=nil end
     end
     function self:request(scope)
-        scope=scope or (self.record and self.record.scope)or 'manager'
+        scope='manager' -- One owner-approved permission for self and other players.
         if o.isManager()then changed();return end
         local name=o.nickname();assert(o.validNick(name),'Сначала войди персонажем')
         assert(self.server~='','Сначала подключись к серверу')
@@ -63,7 +64,7 @@ function M.new(o)
     function self:identity(key,role)
         if self.record and self.record.key==key then
             self.state='approved';self.record=nil;o.save(nil);changed()
-            o.message(role=='player'and 'Ник подтверждён. Теперь можно сбросить свой скин у всех через /mskin.'or 'Доступ управляющего получен. Открой /mskin — можно назначать облики.')
+            o.message(role=='manager'and 'Полный доступ получен. В /mskin можно назначать скины себе и другим.'or 'Доступ ограничен. Попроси владельца панели разрешить назначения.')
         end
     end
     return self

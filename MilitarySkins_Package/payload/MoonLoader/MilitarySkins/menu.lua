@@ -131,18 +131,15 @@ function M.new(o)
         local s=o.state();local a=o.access();local status=a.status or 'idle'
         local code=a.code and (a.code:sub(1,4)..'-'..a.code:sub(5))or nil
         local text,button
-        if s.manager then text=accent..'Доступ управляющего активен.\n\n'..white..'Можно назначать и снимать облики через главное меню.';button='Назад'
+        if s.manager then text=accent..'Полный доступ активен.\n\n'..white..'Можно выбирать скины себе, назначать другим и снимать назначения через главное меню.';button='Назад'
         elseif status=='pending'or status=='confirming'then
-            text=white..'Твой код: '..accent..(code or 'получаем...')..'\n\n'..white..'Сообщи код владельцу панели.\nОн сверит его с запросом и нажмёт «Разрешить».\n\n'..muted..'Подтверждение проверяется автоматически. Код действует 10 минут.';button='Обновить'
+            text=white..'Твой код: '..accent..(code or 'получаем...')..'\n\n'..white..'Сообщи код владельцу панели.\nПосле одобрения можно назначать скины себе и другим.\n\n'..muted..'Подтверждение проверяется автоматически. Код действует 10 минут.';button='Обновить'
         elseif status=='sending'then text=white..'Отправляем запрос доступа...';button='Обновить'
         else
             local prefix=({denied='Запрос отклонён владельцем.\n\n',expired='Срок запроса истёк.\n\n',revoked='Доступ отозван.\n\n',error='Запрос не отправлен.\n\n'})[status]or ''
-            text=white..prefix..'Нажми «Отправить запрос».\nВ панели появятся твой ник и короткий код.\n\n'..muted..'После подтверждения владельцем доступ включится сам.\nДлинные ключи вводить не нужно.';button='Отправить'
+            text=white..prefix..'Нажми «Отправить запрос».\nВ панели появятся твой ник и короткий код.\nПосле одобрения можно выбирать скины себе, назначать другим и снимать назначения.\n\n'..muted..'Доступ подключится сам.\nДлинные ключи вводить не нужно.';button='Отправить'
         end
-        if a.scope=='self'and not s.manager then
-            text=text..'\n\n'..muted..'Это подтверждение своего ника только для сброса скина.\nПраво менять облики других игроков не выдаётся.'
-        end
-        self:show('access',a.scope=='self'and 'Подтверждение моего ника'or 'Доступ к назначению обликов',text,0,button,'Назад',function(response)
+        self:show('access','Полный доступ к скинам',text,0,button,'Назад',function(response)
             if response~=1 or s.manager then self:home();return end
             if status~='pending'and status~='sending'and status~='confirming'then o.command('access request')end
             self:access()

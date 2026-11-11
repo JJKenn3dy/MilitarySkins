@@ -42,8 +42,10 @@ function M.new(profile)
         local r=self.states[id]
         if not r or r.key~=nickname:lower()then return true end
         if r.duty=='off'then return false end
-        -- Unknown masked late joiner: do not invent a duty state.
-        if r.masked and r.duty=='unknown'then return false end
+        -- A mask is not evidence of being off duty. A late viewer/reconnecting
+        -- player can already have it on before any faction color is observed.
+        -- Keep duty unknown but allow the saved assignment until an actual
+        -- civilian color/end-of-shift is observed in this connection.
         return true
     end
     return self

@@ -1,6 +1,6 @@
 script_name('MilitarySkins')
 script_author('Codex')
-script_version('4.3.0')
+script_version('4.4.3')
 script_description('Unified local military skins, personal general and nickname assignments')
 -- Refuse duplicate autorun if a root archive was extracted but migration was not run.
 local function legacyEntryExists(name)
@@ -20,7 +20,7 @@ local function trace(phase)
     local f=io.open(folder..'\\startup_trace.log','a')
     if f then f:write(os.date('!%Y-%m-%dT%H:%M:%SZ'),' ',phase,'\n');f:close()end
 end
-trace('4.3.0 module load; native creation disabled; HTTPS deferred until spawn')
+trace('4.4.3 module load; native creation disabled; HTTPS deferred until spawn')
 local Controller=dofile(folder..'\\controller.lua')
 local Engine=dofile(folder..'\\engine.lua')
 local Settings=dofile(folder..'\\settings.lua')
@@ -337,7 +337,7 @@ local function startMenu()
             local count,active=0,0;for _ in pairs(assignments())do count=count+1 end;for _ in pairs(controller.tracks)do active=active+1 end
             local own=localNickname()
             return {manager=not cloudConfigured or (cloud and cloud.role=='manager'and cloud.manager and own and cloud.manager.nickname:lower()==own:lower())or false,
-                identified=cloud and (cloud.role=='player'or cloud.role=='manager')or false,count=count,active=active,enabled=config.enabled,hidden=selfHidden(own),general=(own and assignments()[own:lower()]and assignments()[own:lower()].model==1061)or (not cloudConfigured and generalEnabled),version='4.3.0',
+                identified=cloud and (cloud.role=='player'or cloud.role=='manager')or false,count=count,active=active,enabled=config.enabled,hidden=selfHidden(own),general=(own and assignments()[own:lower()]and assignments()[own:lower()].model==1061)or (not cloudConfigured and generalEnabled),version='4.4.3',
                 connected=not cloudConfigured or (cloud and cloud.lastSuccess>0 and os.time()-cloud.lastSuccess<=60)or false}
         end})
 end
@@ -406,7 +406,7 @@ command=function(arg)
             if cloudConfigured then
                 if not cloud then message('Дождись подключения к общему списку.');return end
                 if cloud.role=='manager'or cloud.role=='player'then cloud:resetSelf()
-                else cloud:requestAccess('self');if menu then menu:access()end end
+                else cloud:requestAccess();if menu then menu:access()end end
             else
                 if generalEnabled then setGeneral(false)end
                 command('del '..name)
@@ -433,14 +433,15 @@ command=function(arg)
     if verb=='status'then if menu then menu:status()end;return end
     if verb=='debug' then
         local n,active=0,0;for _ in pairs(assignments()) do n=n+1 end;for _ in pairs(controller.tracks) do active=active+1 end
-        message(string.format('v4.3.0 enabled=%s, saved=%d, active=%d, server=%s',tostring(config.enabled),n,active,server))
+        message(string.format('v4.4.3 enabled=%s, saved=%d, active=%d, server=%s',tostring(config.enabled),n,active,server))
         message('Ранняя замена: '..(creationBridge and creationBridge.active and 'включена' or 'отключена; замена геометрии без пересоздания')..'; применено: '..tostring(creationBridge and creationBridge.applied or 0))
-        message('Метод замены: геометрия; текущие анимации и IK сохраняются. Генерал: код 1061 в общем списке.')
+        message('Метод замены: геометрия + привязка суставов; анимации и IK сохраняются. Генерал: код 1061 в общем списке.')
         if cloudConfigured then message('Cloudflare: '..(cloud and (cloud.role..'; revision='..cloud.revision..'; '..(cloud.error or 'OK'))or tostring(cloudError))..'; свой облик скрыт='..tostring(selfHidden(localNickname())))end
         refreshPlayers()
-        for key,entry in pairs(wantedAssignments())do
+        for key,entry in pairs(assignments())do
             local s=backend.state(key);local state
             if not lookup[key] then state='игрок не подключён'
+            elseif not allowed(entry.nickname,lookup[key].id)then state=selfHidden(entry.nickname) and 'свой облик скрыт локально' or 'вне рабочей смены: наблюдался гражданский клист/окончание работы'
             elseif not s.ready then state='персонаж вне зоны прорисовки или ещё не появился'
             elseif not config.enabled then state=controller.tracks[key] and 'замены выключены; ожидается восстановление' or 'замены выключены'
             elseif s.blocked then state='замена заблокирована для этого серверного скина'
@@ -555,3 +556,4 @@ function onScriptTerminate(script,quitGame)
         if backend then pcall(controller.restoreAll,controller,backend)end
     end
 end
+

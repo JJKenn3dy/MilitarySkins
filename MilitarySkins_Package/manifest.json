@@ -1,9 +1,9 @@
 {
-  "version": "4.3.0",
+  "version": "4.4.3",
   "files": [
     {
       "name": "MoonLoader\\MilitarySkins\\access_client.lua",
-      "sha256": "ecb32ab3a72aaad4a4439e68da297a275803074aa2813f66874386aa2877a794"
+      "sha256": "75ab3751b68893aa43d455571fc3733c9e69e151dc59606de4fdf10ca2f1cb67"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\army287.dff",
@@ -31,7 +31,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\cloud_sync.lua",
-      "sha256": "dd216994df3cf6b255d37c4f536d31897892b325c1aaa6ac8499be9573c0cb6e"
+      "sha256": "5b3a2b1e6ce4411d8b862c6bfbe7743c16f760249e2a4334a4a44d993a580e12"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\cloud_transport.lua",
@@ -47,11 +47,11 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\duty_policy.lua",
-      "sha256": "9909219f90f31a633c36b1934e2370ca4e890b34133600b7e2cba13adb6ebfa5"
+      "sha256": "cfc3811aab4a60e748725ceb057c23df85f767e7717cedc8f0f6c37e3262db1d"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\engine.lua",
-      "sha256": "a84ba242c010f8b72bb37516debe1f9a8c0e0f3f1b68a5180a87d0e69ce45167"
+      "sha256": "70eeb77b9ed459a94601590c1452d225237fd4b666bbcb06b77723a118fb64f6"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\fbi_operator120.dff",
@@ -79,7 +79,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\geometry_swap.lua",
-      "sha256": "db4526b862787a412fc48ae179f8032b958538f9972aa8d721bf11492f764cf3"
+      "sha256": "75ad02e654f3cf41777ac4d396dba981e2dadc2eba84b96664f5b772a8e1c1ea"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\memory_guard.lua",
@@ -87,7 +87,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\menu.lua",
-      "sha256": "69512ded469f777abeeef8d0a70a07457618b83a58c83616c00c5fa05aac2bb3"
+      "sha256": "e191eb60d4b270ae2f11977570197490d8dfb7a447921fad58c35ed3be9fc850"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\officer61.dff",
@@ -162,6 +162,10 @@
       "sha256": "56c028bb84068454344e8e5fe425df2d4448165f868e5dc0efa11f596c5c0b4a"
     },
     {
+      "name": "MoonLoader\\MilitarySkins\\rig_offsets.lua",
+      "sha256": "c690eaf6ec3c465fbb3610dc49ff785722bca95631e113c5050dfdc197c8c02a"
+    },
+    {
       "name": "MoonLoader\\MilitarySkins\\rpc_bridge.lua",
       "sha256": "0e197a391df3825d6f8a3fa09b59e8d237f8cbcb29c3a73c2099df98dfc4f779"
     },
@@ -203,7 +207,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins.lua",
-      "sha256": "29ff51da7d6dc6b01826a58220c9c45dd70b4617cee4835d6b021be638f80b55"
+      "sha256": "99f8999db819e0ada6d913386b0119fcf99d9a3c0bfb145bd271fa76b1f45ffc"
     }
   ]
 }
