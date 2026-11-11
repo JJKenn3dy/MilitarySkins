@@ -8,8 +8,12 @@ MoonLoader-скрипт для SA-MP: показывает выбранным и
 
 ## Установка
 
-Скачать архив из раздела Releases, распаковать в корень GTA при закрытой игре
-и запустить `Install_MilitarySkins.cmd`. Откат: `Rollback_MilitarySkins.cmd`.
+**Скачать: https://github.com/JJKenn3dy/MilitarySkins/releases/latest/download/MilitarySkins.zip**
+(ссылка всегда ведёт на последнюю версию).
+
+Полностью закрыть GTA, распаковать архив в папку игры (где gta_sa.exe) с заменой файлов
+и запустить `Install_MilitarySkins.cmd`. Ставится один раз, дальше скрипт обновляется сам.
+Откат: `Rollback_MilitarySkins.cmd` при закрытой игре.
 
 ## Структура
 

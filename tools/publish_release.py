@@ -18,6 +18,19 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 REPO = 'JJKenn3dy/MilitarySkins'
 PACKAGE = ROOT / 'MilitarySkins_Package'
+LATEST = f'https://github.com/{REPO}/releases/latest/download/MilitarySkins.zip'
+NOTES = """## Установка
+
+1. Скачать архив: [MilitarySkins.zip]({LATEST}), он же в списке файлов ниже.
+2. Полностью закрыть GTA.
+3. Распаковать архив в папку игры, где лежит gta_sa.exe, с заменой файлов.
+4. Запустить Install_MilitarySkins.cmd и дождаться надписи installed.
+5. Запустить игру, в игре /mskin.
+
+Ставится один раз. Дальше скрипт сам проверяет новые версии и ставит их без перезахода.
+Откат: Rollback_MilitarySkins.cmd при закрытой игре. Назначения, ключи и настройки сохраняются.
+
+Версия {version}."""
 
 
 def git(*args):
@@ -66,10 +79,12 @@ if '--dry-run' in sys.argv:
     sys.exit(0)
 
 auth = token()
-notes = f'Архив для ручной установки: {archive.name}. Установленный MilitarySkins обновится сам.'
+notes = NOTES.format(version=version, LATEST=LATEST)
 release = api('POST', f'https://api.github.com/repos/{REPO}/releases', auth,
               {'tag_name': tag, 'target_commitish': head, 'name': f'MilitarySkins {version}', 'body': notes})
 upload = release['upload_url'].split('{')[0]
-for path, kind in [(PACKAGE / 'manifest.json', 'application/json'), (archive, 'application/zip')]:
-    api('POST', f'{upload}?name={path.name}', auth, path.read_bytes(), kind)
+# MilitarySkins.zip: постоянная ссылка releases/latest/download/MilitarySkins.zip на свежую версию.
+for name, path, kind in [('manifest.json', PACKAGE / 'manifest.json', 'application/json'),
+                         (archive.name, archive, 'application/zip'), ('MilitarySkins.zip', archive, 'application/zip')]:
+    api('POST', f'{upload}?name={name}', auth, path.read_bytes(), kind)
 print(f'Опубликовано: {release["html_url"]}')
