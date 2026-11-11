@@ -1,5 +1,5 @@
 {
-  "version": "4.4.4",
+  "version": "4.4.5",
   "files": [
     {
       "name": "MoonLoader\\MilitarySkins\\access_client.lua",
@@ -155,11 +155,11 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\president147.dff",
-      "sha256": "eb94149699e0915de8c9e3ec41c4b0e60208d9d96c95a7b575cad7d73d9bc75e"
+      "sha256": "cb3d25e56ca9992bd066db7b55c40ccebbf0717e719476670b2efff182f746d1"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\president147.txd",
-      "sha256": "56c028bb84068454344e8e5fe425df2d4448165f868e5dc0efa11f596c5c0b4a"
+      "sha256": "b36a90131fc686a981df187d9c399d199318feada22b0e3be4bef601a1fadab6"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\rig_offsets.lua",
@@ -207,7 +207,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins.lua",
-      "sha256": "4e8753c14f1a50455473bcbe664659120932b510c4f612578148d1aac37876b3"
+      "sha256": "af508d2aae1804e9e5ebe4656db7275132907d29b6deb57471b3b31ced4e314b"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\release_updater.lua",
