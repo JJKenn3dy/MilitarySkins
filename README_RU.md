@@ -1,4 +1,4 @@
-# MilitarySkins 4.4.6
+# MilitarySkins 4.4.7
 
 Панель: https://military-skins-api.lightlygamer091.workers.dev
 

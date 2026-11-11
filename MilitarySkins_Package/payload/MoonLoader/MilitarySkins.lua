@@ -1,6 +1,6 @@
 script_name('MilitarySkins')
 script_author('Codex')
-local VERSION='4.4.6'
+local VERSION='4.4.7'
 script_version(VERSION)
 script_description('Unified local military skins, personal general and nickname assignments')
 -- Refuse duplicate autorun if a root archive was extracted but migration was not run.
