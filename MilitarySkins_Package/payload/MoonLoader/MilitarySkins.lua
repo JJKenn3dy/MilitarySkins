@@ -20,7 +20,13 @@ local function trace(phase)
     local f=io.open(folder..'\\startup_trace.log','a')
     if f then f:write(os.date('!%Y-%m-%dT%H:%M:%SZ'),' ',phase,'\n');f:close()end
 end
-trace('4.3.0 module load; native creation disabled; HTTPS deferred until spawn')
+trace('4.3.0 module load; native creation disabled; HTTPS deferred until spawn; hot reload patch')
+local reloadRequested=false
+local function reloadTriggered()
+    local path=folder..'\\reload.request';local f=io.open(path,'r')
+    if not f then return false end
+    f:close();os.remove(path);return true
+end
 local Controller=dofile(folder..'\\controller.lua')
 local Engine=dofile(folder..'\\engine.lua')
 local Settings=dofile(folder..'\\settings.lua')
@@ -361,6 +367,7 @@ command=function(arg)
     if verb=='self' then verb='me' end
     if verb==''or verb=='menu'then if menu then menu:home()end;return end
     if verb=='help'then if menu then menu:help()end;return end
+    if verb=='reload'then message('Перезагрузка MilitarySkins...');reloadRequested=true;return end
     if verb=='access'then
         if not cloud then message('Подключение ещё не готово. Дождись появления персонажа.');return end
         if value=='request'then cloud:requestAccess()else if menu then menu:access()end end;return
@@ -526,7 +533,9 @@ function main()
     local refresh=0
     local spawnReadyAt,applicationReady=nil,false
     while true do
-        wait(150);local previous=server;syncServer()
+        wait(150)
+        if reloadRequested or reloadTriggered()then trace('Hot reload requested');thisScript():reload();return end
+        local previous=server;syncServer()
         if previous~=server then refresh=0;spawnReadyAt=nil;applicationReady=false end
         if localPlayerId()and sampGetGamestate()==3 then
             if not spawnReadyAt then spawnReadyAt=os.time();trace('Local spawn observed')end
@@ -553,5 +562,9 @@ function onScriptTerminate(script,quitGame)
         if menu and menu.pending and isSampAvailable() and sampIsDialogActive() and sampGetCurrentDialogId()==DIALOG then pcall(sampCloseCurrentDialogWithButton,0)end
         pending=nil;if menu then menu:cancel()end
         if backend then pcall(controller.restoreAll,controller,backend)end
+        if backend and backend.release then
+            local good,result=pcall(backend.release)
+            trace('Templates released: '..tostring(result)..(good and ''or ' (error)'))
+        end
     end
 end
