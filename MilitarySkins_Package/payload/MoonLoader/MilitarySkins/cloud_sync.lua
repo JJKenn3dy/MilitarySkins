@@ -65,7 +65,7 @@ function M.new(o)
         if not remove then assert(o.models[model]and not o.models[model].localOnly,'Модель недоступна для общего списка')end
         assert(#self.queue<8,'Подожди завершения запроса')
         self.queue[#self.queue+1]={kind='write',path=remove and '/api/assignment/remove'or '/api/assignment',method='POST',key=self.key,
-            body={catalog=3,server=self.server,nickname=nickname,model=not remove and model or nil},nickname=nickname,remove=remove}
+            body={catalog=4,server=self.server,nickname=nickname,model=not remove and model or nil},nickname=nickname,remove=remove}
     end
     function self:resetSelf()
         assert((self.role=='manager'or self.role=='player')and self.manager and self.manager.server==self.server,'Сначала подтверди свой ник')
@@ -73,7 +73,7 @@ function M.new(o)
         assert(name and name:lower()==self.manager.nickname:lower(),'Подтверждение выдано другому нику')
         assert(#self.queue<8,'Подожди завершения запроса')
         self.queue[#self.queue+1]={kind='self_reset',path='/api/self/reset',method='POST',key=self.key,
-            body={server=self.server,catalog=3},nickname=name}
+            body={server=self.server,catalog=4},nickname=name}
     end
     function self:tick()
         if not self:enabled()or self.server==''then return end
@@ -118,7 +118,7 @@ function M.new(o)
         if not request and self.nextIdentity and o.clock()>=self.nextIdentity and self.key~=''then
             self.nextIdentity=o.clock()+30;request={kind='identity',path='/api/me',method='GET',key=self.key}
         end
-        if not request and o.clock()>=self.nextPoll then request={kind='snapshot',method='GET',path='/api/snapshot?server='..self.server..'&catalog=3&since='..self.revision,key=''}end
+        if not request and o.clock()>=self.nextPoll then request={kind='snapshot',method='GET',path='/api/snapshot?server='..self.server..'&catalog=4&since='..self.revision,key=''}end
         if not request then return end
         request.server=self.server;request.epoch=self.epoch
         local body=request.body and o.encode(request.body)or ''

@@ -31,7 +31,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\cloud_sync.lua",
-      "sha256": "5b3a2b1e6ce4411d8b862c6bfbe7743c16f760249e2a4334a4a44d993a580e12"
+      "sha256": "3ed63147a502aee7658d90aeb181e3333d5bd37f532f9a8d421f28ee5ce3c460"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\cloud_transport.lua",
@@ -87,7 +87,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\menu.lua",
-      "sha256": "5aeea9e2576d82a5c27c058b808479c1d4ae9b83c7aa82a6103ea3c19b1f39b2"
+      "sha256": "20ac91c3aa75e2418673824a3778646736de71934367c87e0af068216b216cea"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\officer61.dff",
@@ -179,7 +179,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\settings.lua",
-      "sha256": "d67f709e9cd5c04e63936d786c94fa370ef4d19d3d71bf681e79e6d0f00bbbd8"
+      "sha256": "cab2907f125d64d5381087e539da76bc95110e89e0f56514262c036b8ad5dec9"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\sfu17urban.dff",
@@ -212,6 +212,14 @@
     {
       "name": "MoonLoader\\MilitarySkins\\release_updater.lua",
       "sha256": "d7596f78302b0e99dafa7077032d821ea1afe664e1423b7150298c441d14b789"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\mayor228.dff",
+      "sha256": "09f7488f68ca976eff60965c78625db23274f81f3d5ad8dafbbf9ca68d898ccb"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\mayor228.txd",
+      "sha256": "60939ee320685ee9e92d2f80a4581fafc09e53afaec61728906d85e2eb6cfc98"
     }
   ]
 }
