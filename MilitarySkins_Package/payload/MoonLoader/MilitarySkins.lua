@@ -1,6 +1,7 @@
 script_name('MilitarySkins')
 script_author('Codex')
-script_version('4.3.0')
+local VERSION='4.3.1'
+script_version(VERSION)
 script_description('Unified local military skins, personal general and nickname assignments')
 -- Refuse duplicate autorun if a root archive was extracted but migration was not run.
 local function legacyEntryExists(name)
@@ -20,7 +21,7 @@ local function trace(phase)
     local f=io.open(folder..'\\startup_trace.log','a')
     if f then f:write(os.date('!%Y-%m-%dT%H:%M:%SZ'),' ',phase,'\n');f:close()end
 end
-trace('4.3.0 module load; native creation disabled; HTTPS deferred until spawn; hot reload patch')
+trace(VERSION..' module load; native creation disabled; HTTPS deferred until spawn')
 local reloadRequested=false
 local function reloadTriggered()
     local path=folder..'\\reload.request';local f=io.open(path,'r')
@@ -34,6 +35,8 @@ local RpcBridge=dofile(folder..'\\rpc_bridge.lua')
 local RpcBuild=dofile(folder..'\\rpc_build.lua')
 local MemoryGuard=dofile(folder..'\\memory_guard.lua')
 local DutyPolicy=dofile(folder..'\\duty_policy.lua')
+local Updater=dofile(folder..'\\updater.lua')
+local updater
 local Diagnostics=dofile(folder..'\\duty_diagnostics.lua')
 local Menu=dofile(folder..'\\menu.lua')
 local AccessClient=dofile(folder..'\\access_client.lua')
@@ -331,6 +334,26 @@ end
 local function chooseModel(name,isSelf)
     if menu then menu:modelsMenu(name)end
 end
+local function startUpdater()
+    local downloads=require('moonloader').download_status
+    updater=Updater.new({version=VERSION,root=getWorkingDirectory(),settingsPath=folder..'\\update.json',
+        clock=os.time,decode=decodeJson,encode=encodeJson,message=message,trace=trace,
+        -- Встроенный асинхронный загрузчик MoonLoader: игра не ждёт сеть.
+        download=function(url,path)
+            local job={result='pending',path=path}
+            function job:state()return self.result end
+            local ok=pcall(downloadUrlToFile,url,path,function(_,status)
+                if status==downloads.STATUSEX_ENDDOWNLOAD then job.result='done'end
+            end)
+            if not ok then job.result='failed'end
+            return job
+        end,
+        applied=function(version,restart,count,rolledBack)
+            message((rolledBack and 'Возвращена версия 'or 'Установлена версия ')..version..' (файлов: '..count..'). Перезагрузка...')
+            if restart then message('Обновлена сетевая библиотека: она заработает после перезапуска игры.')end
+            reloadRequested=true
+        end})
+end
 local function startMenu()
     menu=Menu.new({models=Settings.models,order=Settings.order,
         command=function(arg)return command(arg)end,message=message,assignments=assignments,
@@ -343,7 +366,7 @@ local function startMenu()
             local count,active=0,0;for _ in pairs(assignments())do count=count+1 end;for _ in pairs(controller.tracks)do active=active+1 end
             local own=localNickname()
             return {manager=not cloudConfigured or (cloud and cloud.role=='manager'and cloud.manager and own and cloud.manager.nickname:lower()==own:lower())or false,
-                identified=cloud and (cloud.role=='player'or cloud.role=='manager')or false,count=count,active=active,enabled=config.enabled,hidden=selfHidden(own),general=(own and assignments()[own:lower()]and assignments()[own:lower()].model==1061)or (not cloudConfigured and generalEnabled),version='4.3.0',
+                identified=cloud and (cloud.role=='player'or cloud.role=='manager')or false,count=count,active=active,enabled=config.enabled,hidden=selfHidden(own),general=(own and assignments()[own:lower()]and assignments()[own:lower()].model==1061)or (not cloudConfigured and generalEnabled),version=VERSION,autoUpdate=updater and updater.auto or false,
                 connected=not cloudConfigured or (cloud and cloud.lastSuccess>0 and os.time()-cloud.lastSuccess<=60)or false}
         end})
 end
@@ -368,6 +391,15 @@ command=function(arg)
     if verb==''or verb=='menu'then if menu then menu:home()end;return end
     if verb=='help'then if menu then menu:help()end;return end
     if verb=='reload'then message('Перезагрузка MilitarySkins...');reloadRequested=true;return end
+    if verb=='update'then
+        if not updater then message('Обновление недоступно.');return end
+        if value==''or value=='check'then updater:check(true)
+        elseif value=='on'or value=='off'then updater:setAuto(value=='on');message('Автообновление '..(value=='on'and 'включено.'or 'выключено.'))
+        elseif value=='status'then message(updater:statusText())
+        elseif value=='rollback'then updater:rollback()
+        else message('Используй /mskin update, update status, update on/off или update rollback')end
+        return
+    end
     if verb=='access'then
         if not cloud then message('Подключение ещё не готово. Дождись появления персонажа.');return end
         if value=='request'then cloud:requestAccess()else if menu then menu:access()end end;return
@@ -440,7 +472,7 @@ command=function(arg)
     if verb=='status'then if menu then menu:status()end;return end
     if verb=='debug' then
         local n,active=0,0;for _ in pairs(assignments()) do n=n+1 end;for _ in pairs(controller.tracks) do active=active+1 end
-        message(string.format('v4.3.0 enabled=%s, saved=%d, active=%d, server=%s',tostring(config.enabled),n,active,server))
+        message(string.format('v%s enabled=%s, saved=%d, active=%d, server=%s',VERSION,tostring(config.enabled),n,active,server))
         message('Ранняя замена: '..(creationBridge and creationBridge.active and 'включена' or 'отключена; замена геометрии без пересоздания')..'; применено: '..tostring(creationBridge and creationBridge.applied or 0))
         message('Метод замены: геометрия; текущие анимации и IK сохраняются. Генерал: код 1061 в общем списке.')
         if cloudConfigured then message('Cloudflare: '..(cloud and (cloud.role..'; revision='..cloud.revision..'; '..(cloud.error or 'OK'))or tostring(cloudError))..'; свой облик скрыт='..tostring(selfHidden(localNickname())))end
@@ -524,6 +556,8 @@ function main()
     local sharedOK,sharedErr=pcall(startCloud)
     if not sharedOK then cloudError=tostring(sharedErr);cloud=nil;message('Cloudflare не подключён: '..cloudError)end
     startMenu()
+    local updaterOK,updaterErr=pcall(startUpdater)
+    if not updaterOK then trace('Updater disabled: '..tostring(updaterErr))end
     refreshPlayers();sampleDuty()
     trace('Native early creation skipped by 4.0.1 safe mode')
     updateCreationBridge()
@@ -543,6 +577,7 @@ function main()
         else spawnReadyAt=nil;applicationReady=false end
         if refresh<=0 then refreshPlayers();if applicationReady then preloadAssignments()end;updateCreationBridge();refresh=3 else refresh=refresh-1 end
         if cloud and applicationReady then local sharedOK,sharedErr=pcall(cloud.tick,cloud);if not sharedOK then cloudError=tostring(sharedErr);cloud.error=cloudError end end
+        if updater and applicationReady then local updOK,updErr=pcall(updater.tick,updater);if not updOK then trace('Updater error: '..tostring(updErr))end end
         sampleDuty()
         if diagnostic then pcall(diagnostic.poll,diagnostic)end
         local menuOK,menuErr=pcall(pollSelection)

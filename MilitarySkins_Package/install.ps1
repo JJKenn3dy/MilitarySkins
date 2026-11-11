@@ -45,8 +45,8 @@ try{
   if(Test-Path -LiteralPath $target){$disabled=$relative+'.disabled_mskin4_'+$token;$destination=Target $disabled;Move-Item -LiteralPath $target -Destination $destination;$legacy+=@{name=$relative;disabled=$disabled}}
  }
  foreach($r in $records){if((Hash $r.target) -ne $r.sha256){throw 'Installed checksum mismatch'}}
- @{backup=$backup;files=$records;legacy=$legacy;version='4.3.0'}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath $latest -Encoding UTF8
- Write-Output 'MilitarySkins 4.3.0 installed. Start GTA and use /mskin. Ordinary clients receive shared assignments automatically.'
+ @{backup=$backup;files=$records;legacy=$legacy;version='4.3.1'}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath $latest -Encoding UTF8
+ Write-Output 'MilitarySkins 4.3.1 installed. Start GTA and use /mskin. Ordinary clients receive shared assignments automatically.'
 }catch{
  foreach($r in $done){if($r.existed){Copy-Item -LiteralPath (Join-Path $backup $r.name) -Destination $r.target -Force}elseif(Test-Path -LiteralPath $r.target){Remove-Item -LiteralPath $r.target -Force}}
  foreach($entry in $legacy){$disabled=Target $entry.disabled;$original=Target $entry.name;if(Test-Path -LiteralPath $disabled){Move-Item -LiteralPath $disabled -Destination $original}}

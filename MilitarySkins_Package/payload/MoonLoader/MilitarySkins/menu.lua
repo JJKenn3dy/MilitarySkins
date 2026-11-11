@@ -44,6 +44,8 @@ function M.new(o)
         rows[#rows+1]={s.manager and 'Мой доступ'or 'Получить доступ',s.manager and 'Управляющий'or 'Назначать облики другим',function()self:access()end}
         rows[#rows+1]={'Краткая справка','Как пользоваться',function()self:help()end}
         rows[#rows+1]={'Состояние','Подключение и версия',function()self:status()end}
+        rows[#rows+1]={'Проверить обновления','Версия '..s.version,function()o.command('update')end}
+        rows[#rows+1]={'Перезагрузить скрипт','Без перезапуска игры',function()o.command('reload')end}
         self:list('home','MilitarySkins',rows)
     end
     function self:mine()
@@ -124,6 +126,8 @@ function M.new(o)
         lines[#lines+1]=white..'/mskin me off / on — скрыть или показать свой облик'
         lines[#lines+1]=white..'/mskin me reset — сбросить свой скин у всех'
         lines[#lines+1]=white..'/mskin off / on — скрыть или показать все замены'
+        lines[#lines+1]=white..'/mskin update — проверить обновления, update off / on — автообновление'
+        lines[#lines+1]=white..'/mskin reload — перезагрузить скрипт без перезапуска игры'
         lines[#lines+1]=muted..'Локальное скрытие не меняет общий список и видимость у других.'
         self:show('help','MilitarySkins — краткая справка',table.concat(lines,'\n'),0,'Назад','Закрыть',function(button)if button==1 then self:home()end end)
     end
@@ -155,6 +159,7 @@ function M.new(o)
         local s=o.state();local text=white..'Версия: '..s.version..'\nДоступ: '..(s.manager and 'управляющий'or s.identified and 'свой скин'or 'просмотр')..
             '\nПодключение: '..(s.connected and 'есть'or 'ожидание')..'\nОбщих назначений: '..s.count..
             '\nПрименено рядом: '..s.active..'\nЗамены у меня: '..(s.enabled and 'включены'or 'выключены')..
+            '\nАвтообновление: '..(s.autoUpdate and 'включено'or 'выключено')..
             '\n\n'..muted..'Подробная диагностика: /mskin debug'
         self:show('status','MilitarySkins — состояние',text,0,'Назад','Закрыть',function(button)if button==1 then self:home()end end)
     end
