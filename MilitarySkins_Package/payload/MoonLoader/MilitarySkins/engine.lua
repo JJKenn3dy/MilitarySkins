@@ -22,6 +22,13 @@ local signatures = {
     [0x7316B0] = 'a11080c80050e8b5', -- CTxdStore::PopCurrentTxd
     [0x7319C0] = '8b0d0c80c8008b51', -- CTxdStore::SetCurrentTxd
     [0x731A00] = '8b0d0c80c8008b51', -- CTxdStore::AddRef
+    -- Hot reload: release private templates without CTxdStore::RemoveTxdSlot,
+    -- which another mod hooks in this build.
+    [0x74A310] = '5355568b74241057', -- RpClumpDestroy
+    [0x731850] = '8b44240453555657', -- CTxdStore::FindTxdSlot
+    [0x7F3730] = '8b4c24045355568b', -- RwTexDictionaryForAllTextures
+    [0x7F36A0] = 'a14c7bc9008b0d24', -- RwTexDictionaryDestroy
+    [0x731680] = '568b742408837e54', -- CTxdStore keep-shared-texture callback
 }
 
 local function ptr(value) return ffi.cast('uint8_t*', value) end
@@ -54,7 +61,21 @@ function M.new(directory, lookup, currentServer)
     local currentTxd = ffi.cast('void (__cdecl *)(int)', 0x7319C0)
     local txdAddRef = ffi.cast('void* (__cdecl *)(int)', 0x731A00)
     local modelInfos = ffi.cast('void**', 0xA9B0C8)
-    local templates,privateInfos={},{}
+    local templates,privateInfos,txdIds={},{},{}
+    local destroyClump=ffi.cast('void* (__cdecl *)(void*)',0x74A310)
+    local findTxd=ffi.cast('int (__cdecl *)(const char*)',0x731850)
+    local forAllTextures=ffi.cast('void* (__cdecl *)(void*,void*,void*)',0x7F3730)
+    local destroyDictionary=ffi.cast('int (__cdecl *)(void*)',0x7F36A0)
+    pcall(ffi.cdef,'void free(void* block);')
+    -- The private model info is allocated with msvcrt malloc; free it with the same CRT.
+    local crt=ffi.load('msvcrt')
+    -- CTxdStore pool at 0xC8800C: objects, flags; 12-byte slots, dictionary first.
+    local function txdSlot(id)
+        local pool=pointerAt(ffi.cast('void*',0xC8800C),0)[0];if pool==nil then return nil end
+        local flags=ffi.cast('int8_t*',pointerAt(pool,4)[0])
+        if id<0 or flags[id]<0 then return nil end
+        return ffi.cast('void**',ptr(pointerAt(pool,0)[0])+id*12)
+    end
     local checked = false
     local backend = {}
     local function native(signature,address)return ffi.cast(signature,address)end
@@ -130,7 +151,9 @@ function M.new(directory, lookup, currentServer)
         requestModel(entry.base);loadAllModelsNow()
         local baseInfo=modelInfos[entry.base]
         assert(baseInfo~=nil and pointerAt(baseInfo,0x1C)[0]~=nil,'Base skin not loaded: '..entry.base)
-        local txdId=addTxd(entry.dictionary)
+        -- Reuse the slot emptied by a previous instance of this script.
+        local txdId=findTxd(entry.dictionary);local slot=txdSlot(txdId)
+        if not slot or slot[0]~=nil then txdId=addTxd(entry.dictionary)end
         assert(txdId>=0 and loadTxd(txdId,txd),'Could not load '..entry.txd)
         txdAddRef(txdId);pushTxd();currentTxd(txdId)
         local stream=streamOpen(2,1,dff)
@@ -140,7 +163,26 @@ function M.new(directory, lookup, currentServer)
         ffi.cdef 'void* malloc(size_t size);'
         local info=ptr(ffi.load('msvcrt').malloc(0x44));assert(info~=nil,'Model metadata allocation failed')
         ffi.copy(info,baseInfo,0x44);pointerAt(info,0x1C)[0]=nil;ffi.cast('int16_t*',info+0xA)[0]=txdId
-        setClump(info,clump);privateInfos[asset]=info;templates[asset]=clump
+        setClump(info,clump);privateInfos[asset]=info;templates[asset]=clump;txdIds[asset]=txdId
+    end
+    -- Called on script unload after restoreAll. Geometry and textures still used by
+    -- a live ped keep their RenderWare references and survive, as in RemoveTxdSlot.
+    function backend.release()
+        local count=0
+        for asset,clump in pairs(templates)do
+            local info=privateInfos[asset]
+            templates[asset]=nil;privateInfos[asset]=nil
+            if info~=nil then pointerAt(info,0x1C)[0]=nil end
+            destroyClump(ptr(clump))
+            if info~=nil then crt.free(info)end
+            local slot=txdSlot(txdIds[asset] or -1);txdIds[asset]=nil
+            if slot and slot[0]~=nil then
+                local dictionary=slot[0];slot[0]=nil
+                forAllTextures(dictionary,ffi.cast('void*',0x731680),nil);destroyDictionary(dictionary)
+            end
+            count=count+1
+        end
+        return count
     end
     function backend.replace(custom,key,expected,asset)
         checkBuild()

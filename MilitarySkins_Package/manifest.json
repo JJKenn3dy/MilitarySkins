@@ -51,7 +51,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\engine.lua",
-      "sha256": "70eeb77b9ed459a94601590c1452d225237fd4b666bbcb06b77723a118fb64f6"
+      "sha256": "9cad3ad0a2694fe90bd65a33b7386a2298f2ca702335d59b261d38937b83096b"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\fbi_operator120.dff",
@@ -207,7 +207,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins.lua",
-      "sha256": "99f8999db819e0ada6d913386b0119fcf99d9a3c0bfb145bd271fa76b1f45ffc"
+      "sha256": "23a50e8739c7859c6ebca7816a1392a2a3fb113f20be82bf6daed6b4df12cafa"
     }
   ]
 }
