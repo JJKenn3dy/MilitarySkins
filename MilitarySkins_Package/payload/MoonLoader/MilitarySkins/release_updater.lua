@@ -8,7 +8,7 @@ local ffi=require'ffi'
 local M={}
 M.manifestUrl='https://github.com/JJKenn3dy/MilitarySkins/releases/latest/download/manifest.json'
 M.rawBase='https://raw.githubusercontent.com/JJKenn3dy/MilitarySkins/'
-local FIRST_DELAY,INTERVAL,RETRY=30,1800,600
+local FIRST_DELAY,INTERVAL,RETRY=30,300,300
 local MANIFEST_TIMEOUT,FILE_TIMEOUT=30,240
 local PERSONAL={['moonloader\\militaryskins\\cloud_config.json']=true}
 
