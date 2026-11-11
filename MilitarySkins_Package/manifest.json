@@ -1,0 +1,209 @@
+{
+  "version": "4.3.0",
+  "files": [
+    {
+      "name": "MoonLoader\\MilitarySkins\\access_client.lua",
+      "sha256": "ecb32ab3a72aaad4a4439e68da297a275803074aa2813f66874386aa2877a794"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\army287.dff",
+      "sha256": "b86049716fb57b11a702d8904dde870a5adee8c472d65595e9db1ffad74b8d14"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\army287.txd",
+      "sha256": "1f3134afd9a89d46d8b60106a45777fb36d8a76eee1bcd870e54b825e2458ee0"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\captain255.dff",
+      "sha256": "6d99b31c6153f586d5258dd0d0a50d7ddbe09f4651f5ca66c0c843f7bcf4294a"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\captain255.txd",
+      "sha256": "674a295f578ccf63b793de29a673c7ca63a6eb86b0b3fe8f4c7b67b902665973"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\cloud_config.json",
+      "sha256": "d0071394cae8b5208e38f4283a07391a90107243e3105e34a1473e8fc449b9c5"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\cloud_http.dll",
+      "sha256": "17781e66f2725642904caf41579385d5c5c30491b45be44d623e49bec02735f0"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\cloud_sync.lua",
+      "sha256": "dd216994df3cf6b255d37c4f536d31897892b325c1aaa6ac8499be9573c0cb6e"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\cloud_transport.lua",
+      "sha256": "c2f0b8387baf57ba24c5f37ec3fb79577fc0f5c58274399f54b2204048a6e3b1"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\controller.lua",
+      "sha256": "6394dff332285a8521b113711bef1fe09a53ac838acc31ab9e1355cbfe4ec9c0"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\duty_diagnostics.lua",
+      "sha256": "62cd25aecc7107e70b914e658e4b981e0cf05ca61204a1267632b0f5021482dd"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\duty_policy.lua",
+      "sha256": "9909219f90f31a633c36b1934e2370ca4e890b34133600b7e2cba13adb6ebfa5"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\engine.lua",
+      "sha256": "a84ba242c010f8b72bb37516debe1f9a8c0e0f3f1b68a5180a87d0e69ce45167"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi_operator120.dff",
+      "sha256": "c9f5496563c11bffda12d828f3f95b191712da076ccd1366b9e8bbb896200359"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi_operator120.txd",
+      "sha256": "98591d36cc6cb756e0aae5f220f12c56dc58263dae2e0653c6e5c5449e0da256"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi_scout.dff",
+      "sha256": "22ae696041cf7951029d7f96f53a037258c396132d1a6f817a38ad129e214ec9"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi_scout.txd",
+      "sha256": "5f2c96386717591ffc057411dc59aa2aac14a87ccf2f1e5af91a3915f2a1a4d4"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\general61.dff",
+      "sha256": "46240ce86440c2bf28c8981e3bba621ce45c2d1daf89de53897ca06dc9f1bcde"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\general61.txd",
+      "sha256": "1bcc21f9b0e5282011a9c43b8b1d30adf9e2190e8684c6bbeeff2c1948f74448"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\geometry_swap.lua",
+      "sha256": "db4526b862787a412fc48ae179f8032b958538f9972aa8d721bf11492f764cf3"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\memory_guard.lua",
+      "sha256": "b4de5f25051bf56417653d678d85e4f5b08f7caeefac678245be5fb0e10a9dd0"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\menu.lua",
+      "sha256": "69512ded469f777abeeef8d0a70a07457618b83a58c83616c00c5fa05aac2bb3"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\officer61.dff",
+      "sha256": "2e7c7e095890d828171b2e05623bcb475155923ccbf7ca27444a86cab1170001"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\officer61.txd",
+      "sha256": "0ed237f36ad4710821857cdbc3e73bbe730c0f38a1957b3aecf09c6a50a0a806"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_commander.dff",
+      "sha256": "2a6f77c34909ec6ccc5a26da107ec8224a69fa841adb23e33b1bf35a86352b26"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_commander.txd",
+      "sha256": "901dee590d11e06aad7491fa11b64e2735fd3e33496737948b3585a051606fdf"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_commander_urban.dff",
+      "sha256": "d09ed022c41a209305234c5eea4ca9be00f06fd739eca85b087937efc9c6bb47"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_commander_urban.txd",
+      "sha256": "d378144b0432ac91a6ecb7e6e36bad16b3f92d195b87705e845ea1dbcc6e3937"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_operator120_desert.dff",
+      "sha256": "c9f5496563c11bffda12d828f3f95b191712da076ccd1366b9e8bbb896200359"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_operator120_desert.txd",
+      "sha256": "769e3c1be3abb387577378926d04f9923ea98da73bec5032d351c80bddf03bfc"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_operator120_urban.dff",
+      "sha256": "c9f5496563c11bffda12d828f3f95b191712da076ccd1366b9e8bbb896200359"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_operator120_urban.txd",
+      "sha256": "3746e303d807cb75dfd57d6f5261ce28f6caf63bc6e4bad28a5c50e072896dd0"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_sapper.dff",
+      "sha256": "76d8e77bc61859b183cd4b70e8ede197956cc1a272b5a3422615db9903e05e6d"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_sapper.txd",
+      "sha256": "522c940d00f30290107291faf329c49e465062228603e975b4a2b17bed09bfa2"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_scout.dff",
+      "sha256": "4c31efb27558be312dae87170c584c169f6d9e5ca5c5d027cc2cb48af7a8ad77"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_scout.txd",
+      "sha256": "a6108306a67ac9cd9b8a3c277100b3a83259c3685a845e1ee89f6a96b4bb242e"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_scout_urban.dff",
+      "sha256": "22ae696041cf7951029d7f96f53a037258c396132d1a6f817a38ad129e214ec9"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\osn_scout_urban.txd",
+      "sha256": "20c638f8f18ae38d39d8f9ce0025680a083fe54ebafef16ed10c3a859ad84481"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\president147.dff",
+      "sha256": "eb94149699e0915de8c9e3ec41c4b0e60208d9d96c95a7b575cad7d73d9bc75e"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\president147.txd",
+      "sha256": "56c028bb84068454344e8e5fe425df2d4448165f868e5dc0efa11f596c5c0b4a"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\rpc_bridge.lua",
+      "sha256": "0e197a391df3825d6f8a3fa09b59e8d237f8cbcb29c3a73c2099df98dfc4f779"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\rpc_build.lua",
+      "sha256": "8fd7bc06351cd11287bae052bb9364c4e72a811af6ac17bf6bd80ea97300e884"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\secure_random.lua",
+      "sha256": "16cc0bd05f9ee9aae336a5a69a4970b300829f4892febb431b90302cf1276626"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\settings.lua",
+      "sha256": "d67f709e9cd5c04e63936d786c94fa370ef4d19d3d71bf681e79e6d0f00bbbd8"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\sfu17urban.dff",
+      "sha256": "209c6a9e3ac77b4a294cfdc0410a71578604f0ecb27f13c92cefc84a342a3b8a"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\sfu17urban.txd",
+      "sha256": "644129f0b365480375a6f29cd8823f2120fc6c4c2f8af58adbd4cb299affc669"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\soldier179.dff",
+      "sha256": "324cdb2467a7de11cb968d64fe14606f87ac2acf8a4ad4ab3ef92ec801e8142d"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\soldier179.txd",
+      "sha256": "03a927dfa76a52f3b5f4be0ba87c6f01a5bb85cf7cabb9071dbf03b7152f5f60"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\special285.dff",
+      "sha256": "6b37c1b4820ee04b176e4cbaaad0249d4386a9a458971184e5463f53d0a4afec"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\special285.txd",
+      "sha256": "7f278695c46cf831184902273ceba42592bc864d84de3039134e06a5ba8ac542"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins.lua",
+      "sha256": "29ff51da7d6dc6b01826a58220c9c45dd70b4617cee4835d6b021be638f80b55"
+    }
+  ]
+}

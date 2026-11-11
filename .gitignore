@@ -1,0 +1,9 @@
+# Личные данные игрока и журналы: в репозиторий не попадают
+cloud_credentials.json
+cloud_access_pending.json
+startup_trace.log
+assignments.json
+general_enabled.txt
+*.log
+dist/
+__pycache__/
