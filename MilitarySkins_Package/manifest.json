@@ -87,7 +87,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\menu.lua",
-      "sha256": "20ac91c3aa75e2418673824a3778646736de71934367c87e0af068216b216cea"
+      "sha256": "7e8ccf5b9fcea0083a726a32f4b0a38b4242c62fa8416a9f0ba83bfd734e5bc6"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\officer61.dff",
@@ -179,7 +179,7 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\settings.lua",
-      "sha256": "cab2907f125d64d5381087e539da76bc95110e89e0f56514262c036b8ad5dec9"
+      "sha256": "d5619e93a2590f8583eb67506787a164a0c7ec182e1e60eb861f119506c59291"
     },
     {
       "name": "MoonLoader\\MilitarySkins\\sfu17urban.dff",
@@ -219,7 +219,55 @@
     },
     {
       "name": "MoonLoader\\MilitarySkins\\mayor228.txd",
-      "sha256": "60939ee320685ee9e92d2f80a4581fafc09e53afaec61728906d85e2eb6cfc98"
+      "sha256": "b6f2af0cecabcb7f1add370d302eff4ba1ee8ef3d1d3affc63ca3dc2d3b57d98"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi.dff",
+      "sha256": "1e0028242854fd954a0c0bf9cd29dba72611f19196d38a4a1c5ccb921cafd333"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi.txd",
+      "sha256": "2b1d67ab203a24186e9fcdd67fe4ba24b2c49fc640a7460283231b3cbd595dc0"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi_agent165.dff",
+      "sha256": "03f81aebfb7b818aaad8e1acf6149ee1f462fc17b389e374a6aab5a8bc2908a7"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi_agent165.txd",
+      "sha256": "b22b22e83615fbdefda6bef46ab65bd856a8f15463f8f0c11ae9e450cce6f67a"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi_agent166.dff",
+      "sha256": "bf25512cfbea4e63dbb7bb30eaaa5df8ea419a6e7b51bd5346a4a49bf8cd2bea"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi_agent166.txd",
+      "sha256": "4dde4cbc7c204eb2396b13a97f60a08da48421d61c01b72c642901bda1e40a60"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi_agent286.dff",
+      "sha256": "83ba5785d40c61dab01fa4e1b291cb902c6372adac687f890665dc02591be550"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\fbi_agent286.txd",
+      "sha256": "4a093aed5a1e767e290e48c9132cc6b3e0341f579cf76183b818660464c56c2f"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\gf_colonel_field305.dff",
+      "sha256": "8469c63aea05f7f44215a89fbe1281ab066d609d9b327623b5339cd6b6193225"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\gf_colonel_field305.txd",
+      "sha256": "078f4b78ca80aad6f6b7a7ac91ef1a40889e16f3d934e63905ce15d047d149ba"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\gf_senior_lieutenant_desert.dff",
+      "sha256": "738039a39b35baa530f38b5709425f3150ca9ee96f5658023a4e8f51a1ce35ea"
+    },
+    {
+      "name": "MoonLoader\\MilitarySkins\\gf_senior_lieutenant_desert.txd",
+      "sha256": "7c8d04e109888758e5e6782378ce3cb158036108aef83917035f2d79b7e33ab1"
     }
   ]
 }

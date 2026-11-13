@@ -76,7 +76,7 @@ function M.new(o)
         if not category then
             self:list('categories','Категория для '..name,{
                 {'Сухопутные войска','Состав СВ и ОСН',function()self:modelsMenu(name,'army')end},
-                {'ФБР','Оперативник и разведчик FBI',function()self:modelsMenu(name,'fbi')end},
+                {'ФБР','Агенты, оперативник и разведчик FBI',function()self:modelsMenu(name,'fbi')end},
                 {'Правительство','Президент Республики и мэр города',function()self:modelsMenu(name,'government')end}
             },function()self:home()end);return
         end
